@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Title = () => {
+const Title = (props) => {
     return (
-        <h1>Welcome!</h1>
+    <h1>{props.title}!</h1>
     )
 }
 
