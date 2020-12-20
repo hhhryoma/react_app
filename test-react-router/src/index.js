@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Layout from "./pages/Layout";
-import App from './App';
+import Layout from "./js/pages/Layout";
 
 ReactDOM.render(
   <React.StrictMode>
     <Layout />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('app')
 );
 
