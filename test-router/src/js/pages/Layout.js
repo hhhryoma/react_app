@@ -6,7 +6,7 @@ export default class Layout extends React.Component {
     return (
       <div>
         <h1>KillerNews.net</h1>
-        {this.props.children}
+        
         <Link to="/archives">archives</Link>,
         <Link to="/settings">settings</Link>
       </div>

@@ -11,11 +11,11 @@ const app = document.getElementById('app');
 
 ReactDOM.render(
     <Router>
-        <Layout>
-            <Route exact path="/" componet={Featured}/>
-            <Route path="/archives" componet={Archives}/>
-            <Route path="/settings" componet={Settings}/>
-        </Layout>
+        <Layout/>
+        <Route exact path="/" componet={Featured}/>
+        <Route path="/archives" componet={Archives}/>
+        <Route path="/settings" componet={Settings}/>
+        
     </Router>, app
 )
 // export default app
