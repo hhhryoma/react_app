@@ -3,8 +3,12 @@ import React, { useState } from "react";
 
 function Form(props) {
     function handleSubmit(e) {
-        console.log(e.target.value)
-        props.addTask(name)
+        e.preventDefault()
+        if (name !== "") {
+            props.addTask(name)
+        } else {
+            console.log("blank")
+        }
         setName("")
     }
     function handleChange(e) {
