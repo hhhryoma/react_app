@@ -1,10 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect} from "react";
 
 export default function Todo(props) {
     const [isEditing, setEditing] = useState(false)
     const [newName, setNewName] = useState('')
     const name = props.name
+    const editFieldRef = useRef(null)
+    const ediButtonRef = useRef(null)
 
+    const wasEditing = usePrevious(isEditing)
+    function usePrevious(value) {
+        const ref = useRef()
+        useEffect(() => {
+            ref.current = value
+        })
+        return ref.current
+    }
+
+    useEffect(() => {
+        if (!wasEditing && isEditing) {
+            editFieldRef.current.focus()
+        } 
+        if (wasEditing && !isEditing) {
+            ediButtonRef.current.focus()
+        }
+    }, [wasEditing, isEditing]);
+    console.log("main render");
+    
     function handleChange(e) {
         setNewName(e.target.value)
     }
@@ -28,6 +49,7 @@ export default function Todo(props) {
                 type="text"
                 value={newName}
                 onChange={handleChange} 
+                ref={editFieldRef}
             />
             </div>
             <div className="btn-group">
@@ -50,6 +72,7 @@ export default function Todo(props) {
                 type="checkbox"
                 defaultChecked={props.completed}
                 onChange={() => props.toggleTaskCompleted(props.id)}
+                ref={ediButtonRef}
               />
               <label className="todo-label" htmlFor={props.id}>
                 {props.name}
@@ -78,4 +101,5 @@ export default function Todo(props) {
             {isEditing ? editingTemplate : viewTemplate}
         </li>
     )
+
 }
