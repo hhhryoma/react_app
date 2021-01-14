@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {createContext, useState} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import TaskViewMain from './component/TaskView'
+import TaskViewMain from './component/Main'
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <TaskViewMain />
+    <TaskViewMain/>
   </React.StrictMode>,
   document.getElementById('root')
 );
