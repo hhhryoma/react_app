@@ -18,8 +18,6 @@ const taskViewInfo = [{title: "締め切り過ぎてる",
                         condition: (task) => (task.isFinished)}
                     ]
 
-
-
 function TaskViewSub(props) {
     const ToggleTaskFinish = (idx) => {
         const toggledTasks = props.tasksState.map(task => {
