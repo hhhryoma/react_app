@@ -19,6 +19,7 @@ const taskViewInfo = [{title: "締め切り過ぎてる",
                     ]
 
 function TaskViewSub(props) {
+    // タスクのチェックボックスが押下されたときの処理
     const ToggleTaskFinish = (idx) => {
         const toggledTasks = props.tasksState.map(task => {
             if (idx === task.idx) {
@@ -49,9 +50,24 @@ function Task(props) {
         <div className="Task" id={props.task.idx}>
             <input type="checkbox" checked={props.task.isFinished} onChange={() => props.events.check(props.task.idx)}/>
             <input id="taskName" value={props.task.name}/>
+            {// 完了済みタスクには残り時間は表示しない 
+                props.task.isFinished || 
+                <input id="remainingTime" value={CalcRemainingTime(props.task.date, props.task.time)}/>
+            }
             <input type="date" id="period" value={props.task.date}/>
             <input type="time" value={props.task.time}></input>
             <button type="button" id="toEdit" name="edit" value="edit">edit</button>
+        </div>
+    )
+}
+
+function FinishedTask(props) {
+    return (
+        <div className="Task" id={props.task.idx}>
+            <input type="checkbox" checked={props.task.isFinished} onChange={() => props.events.check(props.task.idx)}/>
+            <input id="taskName" value={props.task.name}/>
+            <input type="date" id="period" value={props.task.date}/>
+            <input type="time" value={props.task.time}></input>
         </div>
     )
 }
@@ -61,7 +77,6 @@ function Task(props) {
 // フィルタリングした結果をタスクのリストをJSX形式で変換
 function RetFilterTasks(tasks, filterFunc, events) {
     const filteredTasks = tasks.filter(filterFunc)
-    console.log(filteredTasks)
     if(!filteredTasks.length){
         return (
             <p>No data</p>
@@ -76,6 +91,14 @@ function RetFilterTasks(tasks, filterFunc, events) {
             ))}
         </ul>
     )
+}
+
+// タスクの締め切りまであと何時間あるか計算する
+// 残り時間数を返却する
+const CalcRemainingTime = (to_day, to_time) => {
+    const today = new Date()
+    const to = new Date(`${to_day}T${to_time}`)
+    return Math.round((to - today) / 3600000)
 }
 
 
